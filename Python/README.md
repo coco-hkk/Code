@@ -14,6 +14,7 @@
 - [selenium 网页自动化](#selenium-网页自动化)
 - [unzip 解压缩](#unzip-解压缩)
 - [网络操作](#网络操作)
+- [线程](#线程)
 - [其它](#其它)
 
 # py 转成 exe
@@ -141,6 +142,14 @@ smtpObj.sendmail(from_addr, to_addrs, msg[, mail_options, rcpt_options]
 内置模块 urllib 或安装 requests 模块，`pip install requests`
 
 1. 下载整个网页
+
+# 线程
+参考 thread 目录。
+
+内置模块 threading.
+
+1. 创建线程
+2. 使用互斥锁
 
 # 其它
 1. 获取用户家目录 `base/base.py`

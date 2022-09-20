@@ -15,7 +15,8 @@ pyside6-uic.exe test.ui -o test.py
 ```
 
 # 模板
-- 打开文件对话框，file.py
-- 信息提示对话框，dialog.py
-- 按钮选项卡切换，stack_widget
-- print 重定向到 GUI，print_display
+- file.py，打开文件对话框
+- dialog.py，信息提示对话框
+- stack_widget，按钮选项卡切换
+- print_display，print 重定向到 GUI
+- thread_example.py，线程
