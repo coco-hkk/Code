@@ -118,11 +118,11 @@ HTML DOM 允许 JavaScript 对 HTML 事件作出反应。
 
 如需在用户点击某个元素时执行代码，请把 JavaScript 代码添加到 HTML 事件属性中： `onclick=JavaScript`。
 
-HTML 事件:
-- 当用户点击鼠标时
-- 当网页已加载时
-- 当图片已加载时
-- 当鼠标移动到元素上时
-- 当输入字段被改变时
-- 当 HTML 表单被提交时
-- 当用户触发按键时
+| 事件        | 描述                         |
+| ----------- | ---------------------------- |
+| onchange    | HTML 元素改变                |
+| onclick     | 用户点击 HTML 元素           |
+| onmouseover | 用户在一个HTML元素上移动鼠标 |
+| onmouseout  | 用户从一个HTML元素上移开鼠标 |
+| onkeydown   | 用户按下键盘按键             |
+| onload      | 浏览器已完成页面的加载       |

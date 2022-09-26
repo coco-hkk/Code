@@ -1,8 +1,8 @@
 import sys
 from PySide6.QtWidgets import *
-from stack import Ui_MainWindow
+from ui_mainwindow import Ui_Form
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(QWidget, Ui_Form):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setupUi(self)
@@ -13,10 +13,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pushButton_2.clicked.connect(self.display_click)
 
     def display_file(self):
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
     def display_click(self):
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
