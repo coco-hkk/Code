@@ -1,13 +1,16 @@
 一些实用的 Python 代码。
 
-- [py 转成 exe](#py-转成-exe)
+- [生成 exe](#生成-exe)
+- [反编译](#反编译)
+  - [pyinstxtractor.py](#pyinstxtractorpy)
+  - [uncompyle6](#uncompyle6)
+  - [pycdc](#pycdc)
+- [反反编译](#反反编译)
 - [Excel 操作](#excel-操作)
 - [log 操作](#log-操作)
 - [验证码识别](#验证码识别)
 - [人脸识别](#人脸识别)
 - [格式文件解析](#格式文件解析)
-  - [.ini 格式](#ini-格式)
-  - [json 格式](#json-格式)
 - [html 操作](#html-操作)
 - [图形界面编程 Pyside6](#图形界面编程-pyside6)
 - [SMTP 邮件发送](#smtp-邮件发送)
@@ -17,7 +20,9 @@
 - [线程](#线程)
 - [其它](#其它)
 
-# py 转成 exe
+# 生成 exe
+参考 compile 目录。
+
 1. 安装 pyinstaller 包，`pip install pyinstaller -i https://mirrors.aliyun.com/pypi/simple`
 2. 在 .py 文件所在目录，运行指令 `pyinstaller -F xxx.py`
 3. 生成的 EXE 文件在目录 dist
@@ -25,6 +30,49 @@
 也可以使用图形界面工具生成 EXE 程序。
 1. 安装 auto-py-to-exe，`pip install auto-py-to-exe -i https://mirrors.aliyun.com/pypi/simple`
 2. 在命令行运行 auto-py-to-exe.exe 即可。
+
+# 反编译
+参考 compile 目录。
+
+## pyinstxtractor.py
+[pyinstxtractor.py](https://github.com/extremecoders-re/pyinstxtractor) 是 Pyinstaller 提取器，用于提取由 pyinstaller 生成的 exe 文件。
+
+提取 exe 文件指令 `python pyinstxtractor.py xxx.exe`，提取内容在目录 `xxx.exe_extracted` 中。
+
+## uncompyle6
+安装 uncompyle6 反编译，`pip install uncompyle6`.
+
+- 文件 `xxx` 不带后缀 .pyc，它缺少一些信息，需要修复。如，python3.7 及以上的二进制文件中，头部除了四字节 `Magic Number`，
+  还有四个字节的空位和八个字节的时间戳及大小信息。需通过十六进制编辑工具增加头部信息，可从其它相同版本的 pyc 拷贝。
+- 添加后缀为 `xxx.pyc`，使用 uncompyle6 反编译 pyc 得到 py 文件，`uncompyle6.exe xxx.pyc -o xxx.py`。目前 uncompyle6 只支持到 python3.8.
+
+## pycdc
+对于 python3.10 可以使用 `pycdc` 反编译 pyc 文件，指令 `pycdc.exe xxx.pyc -o xxx.py`。需要确保 python 和 pyinstxtractor.py 版本保持一致，否则 pycdc 解析报错。
+
+[pycdc](https://github.com/zrax/pycdc) 需要自己下载编译。
+
+编译指令：
+```bash
+git clone https://github.com/zrax/pycdc
+cd pycdc
+cmake .
+
+# 若生成 Makefile 则使用 make
+make
+# 若生成 .vcxproj 工程，则打开 Visual Studio 编译
+```
+
+# 反反编译
+参考 compile 目录。
+
+.pyc 文件容易被工具反编译，而 .pyd 则不容易被反编译。
+
+1. 使用 cython 生成 .pyd 文件，`pip install cython`。
+2. 使用 easycython 生成 .pyd 文件，`pip install easycython`。优点较 cython 在于不用 `setup.py`。
+
+- cython 工具需要 Microsoft Visual C++ 14.0 以上版本支持。
+- cython 不支持 goto 语句。
+- python3 版本需要在首行添加代码段 `#cython: language_level=3`.
 
 # Excel 操作
 参考 openpyxl_ 目录。
@@ -76,11 +124,8 @@ logging.conf 为配置文件
 # 格式文件解析
 参考 parse 目录。
 
-## .ini 格式
-使用内置库 ConfigParser。
-
-## json 格式
-使用内置库 json。
+1. `.ini` 格式，使用内置库 ConfigParser。
+2. `json` 格式，使用内置库 json。
 
 # html 操作
 参考 html

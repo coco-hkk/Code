@@ -31,12 +31,10 @@ def ini_config(ini_file):
     # 读取 sec 对应的 value
     all_info = {}
     for sec in sections:
-        sec_values = []
+        sec_values = {}
         for option in sections_options[sec]:
             value = cfg.get(sec, option)
-            sec_value = {}
-            sec_value[option] = value
-            sec_values.append(sec_value)
+            sec_values[option] = value
     
         all_info[sec] = sec_values
 

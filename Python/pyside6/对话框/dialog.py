@@ -1,13 +1,13 @@
 import sys
-from PySide6 import QtCore, QtGui, QtWidgets
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PySide6 import QtCore
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QWidget, QPushButton
 
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(431, 166)
-        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton = QPushButton(Form)
         self.pushButton.setGeometry(QtCore.QRect(160, 50, 91, 41))
         #font = QtGui.QFont()
         #font.setFamily("YaHei Consolas Hybrid")
@@ -22,7 +22,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "对话框"))
         self.pushButton.setText(_translate("Form", "弹出对话框"))
 
-class MyMainForm(QMainWindow, Ui_Form):
+class MyMainForm(QWidget, Ui_Form):
     def __init__(self):
         super(MyMainForm, self).__init__()
         self.setupUi(self)

@@ -5,10 +5,11 @@ selenium 版本 4.4.3.
   - [获取 webdriver](#获取-webdriver)
   - [打开网页](#打开网页)
   - [打开新的标签页和窗口](#打开新的标签页和窗口)
+  - [执行 js 代码](#执行-js-代码)
 - [问题集锦](#问题集锦)
-  - [ElementClickInterceptedException](#elementclickinterceptedexception)
-  - [UnexpectedAlertPresentException](#unexpectedalertpresentexception)
-  - [切换 alert](#切换-alert)
+  - [异常](#异常)
+    - [ElementClickInterceptedException](#elementclickinterceptedexception)
+    - [UnexpectedAlertPresentException](#unexpectedalertpresentexception)
 - [其它](#其它)
 
 # Selenium 基础
@@ -44,10 +45,22 @@ driver.switch_to.new_window('tab')
 driver.get('https://opensource.saucelabs.com/')
 ```
 
+## 执行 js 代码
+```python
+# 使用 return 获取值 play_speed 为视频播放速度
+js_code = "return document.querySelector('video').playbackRate"
+play_speed = self.driver.execute_script(js_code)
+
+# 设置值，将视频播放速度设置为 2 倍
+js_code = "document.querySelector('video').playbackRate = 2.0"
+self.driver.execute_script(js_code)
+```
+
 # 问题集锦
 driver 表示浏览器句柄。
 
-## ElementClickInterceptedException
+## 异常
+### ElementClickInterceptedException
 点击元素失败。
 
 ```python
@@ -60,10 +73,10 @@ element = driver.find_element(By.ID, 'id')
 webdriver.ActionChains(driver).move_to_element(element).click(element).perform()
 ```
 
-## UnexpectedAlertPresentException
+### UnexpectedAlertPresentException
 这个异常应该是 alert 一直不出现，导致无法确认 alert。
 
-## 切换 alert
+#### 确认或取消 alert
 
 ```python
 WebDriverWait(driver, 5).until(EC.alert_is_present()).dismiss()
