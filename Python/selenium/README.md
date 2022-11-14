@@ -1,11 +1,14 @@
 selenium 版本 4.4.3.
 
 - [Selenium 基础](#selenium-基础)
-  - [设置 option](#设置-option)
+  - [设置 Options](#设置-options)
+  - [设置 Service](#设置-service)
   - [获取 webdriver](#获取-webdriver)
   - [打开网页](#打开网页)
   - [打开新的标签页和窗口](#打开新的标签页和窗口)
   - [执行 js 代码](#执行-js-代码)
+  - [切换 iframe](#切换-iframe)
+  - [模拟按键](#模拟按键)
 - [问题集锦](#问题集锦)
   - [异常](#异常)
     - [ElementClickInterceptedException](#elementclickinterceptedexception)
@@ -13,7 +16,7 @@ selenium 版本 4.4.3.
 - [其它](#其它)
 
 # Selenium 基础
-## 设置 option
+## 设置 Options
 ```python
 options = Options()
 # 操作已打开的浏览器
@@ -21,11 +24,18 @@ options = Options()
 options.add_experimental_option("debuggerAddress", "127.0.0.1:9527")
 ```
 
-## 获取 webdriver
+## 设置 Service
 ```python
-# chromedriver.exe 路径
+# 设置 chromedriver.exe 路径
 chromedriver = "/path/to/chromedriver.exe"
 service = Service(chromedriver)
+
+# 隐藏 chromedriver 运行时的黑窗口
+service.creationflags = CREATE_NO_WINDOW
+```
+
+## 获取 webdriver
+```python
 browser = webdriver.Chrome(service=service, options=options)
 ```
 
@@ -37,23 +47,41 @@ browser.get("www.baidu.com")
 ## 打开新的标签页和窗口
 ```python
 # 打开一个新的 window，并切换过去打开新网页
-driver.switch_to.new_window('window')
-driver.get('https://opensource.saucelabs.com/')
+browser.switch_to.new_window('window')
+browser.get('https://opensource.saucelabs.com/')
 
 # 打开一个新的 tab，并切换过去打开新网页
-driver.switch_to.new_window('tab')
-driver.get('https://opensource.saucelabs.com/')
+browser.switch_to.new_window('tab')
+browser.get('https://opensource.saucelabs.com/')
 ```
 
 ## 执行 js 代码
 ```python
 # 使用 return 获取值 play_speed 为视频播放速度
 js_code = "return document.querySelector('video').playbackRate"
-play_speed = self.driver.execute_script(js_code)
+play_speed = browser.execute_script(js_code)
 
 # 设置值，将视频播放速度设置为 2 倍
 js_code = "document.querySelector('video').playbackRate = 2.0"
-self.driver.execute_script(js_code)
+browser.execute_script(js_code)
+
+# 点击按钮
+button_js = 'document.getElementsByClassName("jbox-button")[0].click()'
+browser.execute_script(button_js)
+```
+
+## 切换 iframe
+```python
+# 切换到 iframe
+browser.switch_to.frame('jbox-iframe')
+
+# 切换回父 frame
+browser.switch_to.default_content()
+```
+
+## 模拟按键
+```python
+webdriver.ActionChains(browser).move_to_element(click_btn).click().perform()
 ```
 
 # 问题集锦

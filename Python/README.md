@@ -31,6 +31,8 @@
 1. 安装 auto-py-to-exe，`pip install auto-py-to-exe -i https://mirrors.aliyun.com/pypi/simple`
 2. 在命令行运行 auto-py-to-exe.exe 即可。
 
+使用 [`installforge`](https://installforge.net/download/) 创建可运行的 Windows 安装程序。
+
 # 反编译
 参考 compile 目录。
 
