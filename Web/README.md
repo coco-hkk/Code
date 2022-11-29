@@ -1,5 +1,5 @@
-# JavaScript
-JavaScript 是一种轻量级的编程语言，可插入 HTML 页面的编程代码。
+# Web
+网页及浏览器相关知识。
 
 ## html 知识点
 参考 html 目录。
